@@ -91,7 +91,7 @@ def login():
     user = User.query.filter_by(email=email).first()
     if user and checkpw(password.encode('utf-8'), user.password):
         token = jwt_encode({'user_id': user.id}, app.config['SECRET_KEY'], algorithm='HS256')
-        return jsonify({'message': 'Login successful', 'token': token}), 200
+        return jsonify({'message': 'Login successful', 'token': token, 'name': user.name}), 200
     else:
         return jsonify({'message': 'Invalid email or password'}), 401
 
